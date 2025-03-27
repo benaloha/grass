@@ -1,0 +1,17 @@
+xhost local:$(id -u)
+
+docker run -it --privileged  --rm \
+--volume="$(pwd)/:/data" \
+--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+--env HOME=/data/ --env DISPLAY=$DISPLAY \
+--device="/dev/dri/card1:/dev/dri/card1" \
+osgeo/grass-gis:main-ubuntu_wxgui \
+grass --gui
+
+docker run -it --privileged  --rm \
+--volume="$(pwd)/:/data" \
+--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+--env HOME=/data/ --env DISPLAY=$DISPLAY \
+--device="/dev/dri/card1:/dev/dri/card1" \
+ben:5000/grass-diy-build \
+grass --gui
